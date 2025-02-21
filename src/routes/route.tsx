@@ -1,17 +1,11 @@
-
 import DashboardLayout from "@/modules/dashboard/layout";
 import Categoria from "@/modules/categoria/page";
 import Nivel from "@/modules/nivel/page";
 
-
 export const routes = [
     {
         path: "/",
-       
-    },
-    {
-        path: "/dashboard",
-        element: <DashboardLayout />,  
+        element: <DashboardLayout />,
         children: [
             {
                 path: "categoria", 

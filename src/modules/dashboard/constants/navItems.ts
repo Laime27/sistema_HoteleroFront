@@ -4,8 +4,8 @@ export interface SidebarItem {
   }
   
   export const sidebarItems: SidebarItem[] = [
-    { name: "Nivel", href: "/dashboard/nivel" },
-    { name: "Categoria", href: "/dashboard/categoria" },
+    { name: "Nivel", href: "/nivel" },
+    { name: "Categoria", href: "/categoria" },
     { name: "Cliente", href: "/" },
   ];
   
