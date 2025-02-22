@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { CrearNivel, ObtenerNivel, ActualizarNivel} from "../servicio/nivelServicio";
+import {useMostrarMensaje } from "@/components/toastUtils";
+
 
 interface ModalNivelProps {
   isOpen: boolean;
@@ -39,6 +41,8 @@ function ModalNivel({
   } = useForm<NivelForm>({
     shouldUnregister: true,
   });
+  
+  const { mostrarMensaje } = useMostrarMensaje();
 
   const ObtenerDatoNivel = async () => {
       if(nivelId){
@@ -50,8 +54,10 @@ function ModalNivel({
   const onSubmit = async (data: any) => {
     if (nivelId) {
       await ActualizarNivel(nivelId, data.nombre);
+      mostrarMensaje("éxito", "Nivel actualizado correctamente");
     } else {
       await CrearNivel(data.nombre);
+      mostrarMensaje("éxito", "Nivel creado correctamente");
     }
 
     actualizarLista();

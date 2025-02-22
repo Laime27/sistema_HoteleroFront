@@ -3,7 +3,7 @@ import axios from "@/libs/axios";
 export const ListarCategoria = async (page: number = 1) => {
   try {
     const response = await axios.get(`/categoria?page=${page}`);
-    return response.data; 
+    return response.data;
   } catch (error: any) {
     if (error.response) {
       return error.response.data.message || "Error desconocido";
@@ -12,17 +12,16 @@ export const ListarCategoria = async (page: number = 1) => {
   }
 };
 
-
 export const CrearCategoria = async (nombre: string) => {
-    try {
-        const response = await axios.post("/categoria", { nombre });
-        return response.data;
-    } catch (error: any) {
-        if (error.response) {
-            return error.response.data.message || "Error desconocido";
-        }
-        return "Error en la conexión";
+  try {
+    const response = await axios.post("/categoria", { nombre });
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      return error.response.data.message || "Error desconocido";
     }
+    return "Error en la conexión";
+  }
 };
 
 export const ObtenerCategoria = async (id: string) => {

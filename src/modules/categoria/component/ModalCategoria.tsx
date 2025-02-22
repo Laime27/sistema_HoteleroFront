@@ -12,12 +12,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import {
   CrearCategoria,
   ObtenerCategoria,
   ActualizarCategoria,
 } from "../servicio/categoriaServicio";
+
+import { useMostrarMensaje } from "@/components/toastUtils";
 
 interface ModalCategoriaProps {
   isOpen: boolean;
@@ -36,8 +37,6 @@ export default function ModalCategoria({
   categoriaId,
   actualizarLista,
 }: ModalCategoriaProps) {
-  const { toast } = useToast();
-
   const {
     register,
     handleSubmit,
@@ -48,16 +47,7 @@ export default function ModalCategoria({
     shouldUnregister: true,
   });
 
-  const mostrarMensaje = (tipo: "éxito" | "error", mensaje: string) => {
-    toast({
-      className:
-        tipo === "éxito" ? "bg-green-700 text-white" : "bg-red-700 text-white",
-      title: tipo === "éxito" ? "Éxito" : "Error",
-      description: mensaje,
-      duration: 2000,
-      variant: tipo === "error" ? "destructive" : undefined,
-    });
-  };
+  const { mostrarMensaje } = useMostrarMensaje();
 
   const obtenerDatos = async () => {
     if (categoriaId) {
@@ -125,6 +115,12 @@ export default function ModalCategoria({
             {...register("nombre", { required: "El nombre es obligatorio" })}
             className={errors.nombre ? "border-red-500" : ""}
           />
+
+          {errors.nombre && (
+            <span className="text-red-500 text-sm">
+              {errors.nombre.message}
+            </span>
+          )}
 
           <DialogFooter className="mt-6">
             <Button
